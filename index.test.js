@@ -25,16 +25,20 @@ test('running a CLI', async (t) => {
     `
   )
 
-  const {output} = await runProcess(t, {
+  const program = runProcess(t, {
     command: ['./bin.mjs', 'arg1', 'arg2'],
     cwd: directory.path,
     env: {FOO: 'BAR'}
   })
 
-  t.log(output)
-  t.true(output.includes(directory.path))
-  t.true(output.includes('FOO=BAR'))
-  t.true(output.includes('arg1 arg2'))
+  for await (const data of program.outputStream) {
+    console.log(data)
+  }
+
+  t.log(program.output)
+  t.true(program.output.includes(directory.path))
+  t.true(program.output.includes('FOO=BAR'))
+  t.true(program.output.includes('arg1 arg2'))
 })
 
 test('setting CLI flags', async (t) => {
