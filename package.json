@@ -1,7 +1,7 @@
 {
   "name": "puff-pastry",
   "version": "0.0.0",
-  "description": "An awesome package",
+  "description": "Scaffolding for CLI tools",
   "keywords": [],
   "homepage": "https://github.com/vinsonchuong/puff-pastry",
   "bugs": "https://github.com/vinsonchuong/puff-pastry/issues",
@@ -16,6 +16,8 @@
   "dependencies": {},
   "devDependencies": {
     "ava": "^3.12.1",
+    "ava-patterns": "^2.4.0",
+    "quick-install": "^1.2.0",
     "semantic-release": "^17.1.1",
     "xo": "^0.33.1"
   },
@@ -30,7 +32,8 @@
       "import/extensions": "off",
       "import/no-anonymous-default-export": "off",
       "import/no-useless-path-segments": "off",
-      "unicorn/import-index": "off"
+      "unicorn/import-index": "off",
+      "unicorn/no-process-exit": "off"
     }
   }
 }

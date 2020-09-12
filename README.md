@@ -4,7 +4,7 @@
 [![dependencies Status](https://david-dm.org/vinsonchuong/puff-pastry/status.svg)](https://david-dm.org/vinsonchuong/puff-pastry)
 [![devDependencies Status](https://david-dm.org/vinsonchuong/puff-pastry/dev-status.svg)](https://david-dm.org/vinsonchuong/puff-pastry?type=dev)
 
-An awesome package
+Scaffolding for CLI tools
 
 ## Usage
 Install [puff-pastry](https://www.npmjs.com/package/puff-pastry)
@@ -13,3 +13,34 @@ by running:
 ```sh
 yarn add puff-pastry
 ```
+
+Use it to create command-line executables like so:
+
+```js
+#!/usr/bin/env node
+import run from 'puff-pastry'
+
+run('./cli.mjs', {
+  flags: ['--loader', 'hot-esm']
+})
+```
+
+```js
+export default async function({cwd, env, argv, log}) {
+  log('Hello World!')
+}
+```
+
+`run()` takes the path to a CLI entry function and calls it with an object
+containing:
+
+- `cwd`: The current working directory
+- `env`: An object containing the environment variables
+- `argv`: The command-line arguments
+- `log`: Write strings directly to STDOUT.
+
+Encapsulating a CLI into a function that takes arguments instead of relying on
+the `process` global object allows for:
+
+- Easier unit testing
+- Easier composition of CLI tools from JavaScript
