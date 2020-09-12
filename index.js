@@ -7,14 +7,12 @@ export default async function (cliPath, {flags = []} = {}) {
   const {default: cli} = await import(absoluteCliPath)
 
   if (flags.some((flag) => !process.execArgv.includes(flag))) {
-    console.log('forking')
     fork(process.argv[1], process.argv.slice(2), {
       stdio: 'inherit',
       execArgv: [...process.execArgv, ...flags]
     })
   } else {
     try {
-      console.log('not forking', cli.toString())
       await cli({
         cwd: process.cwd(),
         env: process.env,
