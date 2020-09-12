@@ -1,3 +1,4 @@
+/* eslint-disable ava/no-only-test */
 import test from 'ava'
 import {useTemporaryDirectory, runProcess} from 'ava-patterns'
 import install from 'quick-install'
