@@ -66,3 +66,46 @@ test('setting CLI flags', async (t) => {
   t.log(output)
   t.true(output.includes('--title foo'))
 })
+
+test('properly resolving the CLI path', async (t) => {
+  const packageDirectory = await useTemporaryDirectory(t)
+  await packageDirectory.writeFile(
+    'package.json',
+    `
+      {
+        "name": "project",
+        "version": "0.0.0",
+        "bin": "./bin.mjs"
+      }
+    `
+  )
+  await install(process.cwd(), packageDirectory.path)
+  await packageDirectory.writeFile(
+    'bin.mjs',
+    `
+    #!/usr/bin/env node
+    import run from 'puff-pastry'
+    run('./cli.mjs')
+    `
+  )
+  await packageDirectory.writeFile(
+    'cli.mjs',
+    `
+    export default async function({cwd, env, argv, log}) {
+      log(\`FOO=\${env.FOO}\\n\`)
+    }
+    `
+  )
+
+  const projectDirectory = await useTemporaryDirectory(t)
+  await install(packageDirectory.path, projectDirectory.path)
+
+  const {output} = await runProcess(t, {
+    command: ['npx', 'project'],
+    cwd: projectDirectory.path,
+    env: {FOO: 'BAR'}
+  })
+
+  t.log(output)
+  t.true(output.includes('FOO=BAR'))
+})

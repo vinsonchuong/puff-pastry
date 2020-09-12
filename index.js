@@ -1,8 +1,9 @@
 import * as path from 'path'
+import {promises as fs} from 'fs'
 import {fork} from 'child_process'
 
 export default async function (cliPath, {flags = []} = {}) {
-  const binPath = process.argv[1]
+  const binPath = await fs.realpath(process.argv[1])
   const absoluteCliPath = path.resolve(path.dirname(binPath), cliPath)
   const {default: cli} = await import(absoluteCliPath)
 
