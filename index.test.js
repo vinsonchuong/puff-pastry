@@ -4,9 +4,13 @@ import {useTemporaryDirectory, runProcess} from 'ava-patterns'
 import install from 'quick-install'
 
 test.only('running a CLI', async (t) => {
+  console.log('make dir')
   const directory = await useTemporaryDirectory(t)
 
+  console.log('quick install')
   await install(process.cwd(), directory.path)
+
+  console.log('write bin')
   await directory.writeFile(
     'bin.mjs',
     `
@@ -15,6 +19,8 @@ test.only('running a CLI', async (t) => {
     run('./cli.mjs')
     `
   )
+
+  console.log('write cli')
   await directory.writeFile(
     'cli.mjs',
     `
@@ -26,12 +32,16 @@ test.only('running a CLI', async (t) => {
     `
   )
 
+  console.log('spawn')
   const program = runProcess(t, {
     command: ['./bin.mjs', 'arg1', 'arg2'],
     cwd: directory.path,
     env: {FOO: 'BAR'}
   })
 
+  console.log('program', program)
+
+  console.log('look at output')
   for await (const data of program.outputStream) {
     console.log(data)
   }
