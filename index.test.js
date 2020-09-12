@@ -2,7 +2,7 @@ import test from 'ava'
 import {useTemporaryDirectory, runProcess} from 'ava-patterns'
 import install from 'quick-install'
 
-test('running a CLI', async (t) => {
+test.only('running a CLI', async (t) => {
   const directory = await useTemporaryDirectory(t)
 
   await install(process.cwd(), directory.path)
