@@ -15,11 +15,11 @@
   "type": "module",
   "dependencies": {},
   "devDependencies": {
-    "ava": "^3.12.1",
+    "ava": "^3.13.0",
     "ava-patterns": "^2.4.0",
     "quick-install": "^1.2.0",
-    "semantic-release": "^17.1.1",
-    "xo": "^0.33.1"
+    "semantic-release": "^17.2.1",
+    "xo": "^0.34.0"
   },
   "ava": {
     "verbose": true,
