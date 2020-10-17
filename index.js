@@ -18,9 +18,8 @@ export default async function (cliPath, {flags = []} = {}) {
         cwd: process.cwd(),
         env: process.env,
         argv: process.argv,
-        log: (data) => {
-          process.stdout.write(data)
-        }
+        stdout: process.stdout,
+        stderr: process.stderr
       })
     } catch (error) {
       console.log(error)

@@ -37,7 +37,8 @@ containing:
 - `cwd`: The current working directory
 - `env`: An object containing the environment variables
 - `argv`: The command-line arguments
-- `log`: Write strings directly to STDOUT.
+- `stdout`: A stream that writes to STDOUT
+- `stderr`: A stream that writes to STDERR
 
 Encapsulating a CLI into a function that takes arguments instead of relying on
 the `process` global object allows for:

@@ -17,10 +17,10 @@ test('running a CLI', async (t) => {
   await directory.writeFile(
     'cli.mjs',
     `
-    export default async function({cwd, env, argv, log}) {
-      log(\`\${cwd}\\n\`)
-      log(\`FOO=\${env.FOO}\\n\`)
-      log(argv.join(' ') + '\\n')
+    export default async function({cwd, env, argv, stdout}) {
+      stdout.write(\`\${cwd}\\n\`)
+      stdout.write(\`FOO=\${env.FOO}\\n\`)
+      stdout.write(argv.join(' ') + '\\n')
     }
     `
   )
@@ -52,8 +52,8 @@ test('setting CLI flags', async (t) => {
   await directory.writeFile(
     'cli.mjs',
     `
-    export default async function({cwd, env, argv, log}) {
-      log(process.execArgv.join(' ') + '\\n')
+    export default async function({cwd, env, argv, stdout}) {
+      stdout.write(process.execArgv.join(' ') + '\\n')
     }
     `
   )
@@ -91,8 +91,8 @@ test('properly resolving the CLI path', async (t) => {
   await packageDirectory.writeFile(
     'cli.mjs',
     `
-    export default async function({cwd, env, argv, log}) {
-      log(\`FOO=\${env.FOO}\\n\`)
+    export default async function({cwd, env, argv, stdout}) {
+      stdout.write(\`FOO=\${env.FOO}\\n\`)
     }
     `
   )
