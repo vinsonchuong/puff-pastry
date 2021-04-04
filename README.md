@@ -40,6 +40,10 @@ containing:
 - `stdout`: A stream that writes to STDOUT
 - `stderr`: A stream that writes to STDERR
 
+Also, if a `.env.yml` file is present in the current working directory, it is
+read and added to `env`. See
+[vinsonchuong/envdotyml](https://github.com/vinsonchuong/envdotyml).
+
 Encapsulating a CLI into a function that takes arguments instead of relying on
 the `process` global object allows for:
 

@@ -13,7 +13,9 @@
     "release": "semantic-release"
   },
   "type": "module",
-  "dependencies": {},
+  "dependencies": {
+    "envdotyml": "^1.2.0"
+  },
   "devDependencies": {
     "ava": "^3.15.0",
     "ava-patterns": "^2.4.1",

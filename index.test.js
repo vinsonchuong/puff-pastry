@@ -109,3 +109,39 @@ test('properly resolving the CLI path', async (t) => {
   t.log(output)
   t.true(output.includes('FOO=BAR'))
 })
+
+test('adding environment variables from .env.yml', async (t) => {
+  const directory = await useTemporaryDirectory(t)
+
+  await install(process.cwd(), directory.path)
+  await directory.writeFile(
+    'bin.mjs',
+    `
+    #!/usr/bin/env node
+    import run from 'puff-pastry'
+    run('./cli.mjs')
+    `
+  )
+  await directory.writeFile(
+    'cli.mjs',
+    `
+    export default async function({cwd, env, argv, stdout}) {
+      stdout.write(\`FOO=\${env.FOO}\\n\`)
+    }
+    `
+  )
+  await directory.writeFile(
+    '.env.yml',
+    `
+    FOO: BAR
+    `
+  )
+
+  const {output} = await runProcess(t, {
+    command: ['./bin.mjs'],
+    cwd: directory.path
+  })
+
+  t.log(output)
+  t.true(output.includes('FOO=BAR'))
+})

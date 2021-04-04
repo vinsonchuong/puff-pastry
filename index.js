@@ -1,6 +1,7 @@
 import path from 'path'
 import {promises as fs} from 'fs'
 import {fork} from 'child_process'
+import {set} from 'envdotyml'
 
 export default async function (cliPath, {flags = []} = {}) {
   const binPath = await fs.realpath(process.argv[1])
@@ -14,6 +15,8 @@ export default async function (cliPath, {flags = []} = {}) {
     })
   } else {
     try {
+      await set()
+
       await cli({
         cwd: process.cwd(),
         env: process.env,
