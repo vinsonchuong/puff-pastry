@@ -8,6 +8,7 @@
   "license": "MIT",
   "author": "Vinson Chuong <vinsonchuong@gmail.com>",
   "repository": "vinsonchuong/puff-pastry",
+  "main": "index.js",
   "scripts": {
     "test": "xo && ava",
     "release": "semantic-release"
