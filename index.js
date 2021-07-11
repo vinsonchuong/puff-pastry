@@ -1,6 +1,6 @@
-import path from 'path'
-import {promises as fs} from 'fs'
-import {fork} from 'child_process'
+import path from 'node:path'
+import {promises as fs} from 'node:fs'
+import {fork} from 'node:child_process'
 import {set} from 'envdotyml'
 
 export default async function (cliPath, {flags = []} = {}) {
